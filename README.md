@@ -16,7 +16,7 @@ This will be our webiste for the DDoS Detection Thesis part...
 
 ### **Work on hand :**
 
-1. Initialize the **redux-toolkit** and **redux-store**
+1. ~~Initialize the **redux-toolkit** and **redux-store**~~
 2. Have the **home page** as the following
     - nav menu in the left
     - notification menu at the tight top

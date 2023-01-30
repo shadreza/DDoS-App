@@ -1,7 +1,7 @@
 # DDoS Detector
 
 This will be our webiste for the DDoS Detection Thesis part...
-<br/><br/>
+<br/>
 
 ## **Initial Plans :**
 
@@ -12,7 +12,7 @@ This will be our webiste for the DDoS Detection Thesis part...
     -   Can upload log files [initial]
     -   Can see the detection metrixs on that
 
-<br/><br/>
+<br/>
 
 ### **Work on hand :**
 

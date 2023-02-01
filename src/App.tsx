@@ -1,12 +1,15 @@
-import React from 'react';
-import Temp from './components/redux-functions/Temp';
+import { Box } from '@mui/material';
+import CsvReader from './components/CsvReader';
 
 function App() {
 
   return (
-    <div className="App">
-      <Temp/>
-    </div>
+    <Box sx={{
+      backgroundColor: '#a7ffeb',
+      height: '100vh',
+    }}>
+      <CsvReader/>
+    </Box>
   );
 }
 

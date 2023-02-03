@@ -40,6 +40,23 @@ const DataTable = () => {
     setPage(newPage);
   };
 
+  const alterPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const pageValue= parseInt(event.target.value)
+    if (pageValue) {
+      if (pageValue < 0) {
+        setPage(0)
+      } else {
+        if ((pageValue + 1) * rowsPerPage > dataJson.length) {
+          setPage((dataJson.length / rowsPerPage)-1)
+        } else {
+          setPage(pageValue)
+        }
+      }
+    } else {
+      setPage(0)
+    }
+  }
+
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
@@ -108,15 +125,18 @@ const DataTable = () => {
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <span style={{fontSize: 14}}>Page Index # <input type="number" name="page" id="pageCounterId" value={page} onChange={alterPage} style={{width: 80}}/> </span>
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100, 500]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </div>
       </Paper>
     </div>
   )

@@ -46,7 +46,11 @@ const DataTable = () => {
       if (pageValue < 0) {
         setPage(0)
       } else {
-        setPage(pageValue)
+        if ((pageValue + 1) * rowsPerPage > dataJson.length) {
+          setPage((dataJson.length / rowsPerPage)-1)
+        } else {
+          setPage(pageValue)
+        }
       }
     } else {
       setPage(0)

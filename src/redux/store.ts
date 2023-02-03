@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import tempReducer from './features/temp'
+import dataReducer from './features/dataJson'
 
 export const store = configureStore({
   reducer: {
     tmpStore: tempReducer,
+    dataStore: dataReducer,
   },
 })
 

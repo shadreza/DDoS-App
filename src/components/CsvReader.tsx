@@ -1,11 +1,19 @@
 import UploadRoundedIcon from '@mui/icons-material/UploadRounded';
-import { Container, Typography } from '@mui/material';
+import { Container, Input, Typography } from '@mui/material';
 import { ChangeEvent, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearDataJson, clearHeaders, setDataJson, setHeaders } from '../redux/features/dataJson';
+import { RootState } from '../redux/store';
+import DataTable from './DataTable';
 
 const CsvReader = () => {
 
+  const dispatch = useDispatch();
+  const {dataJson} = useSelector((state: RootState) => state.dataStore)
+
+
   const [csvFile, setCsvFile] = useState<File>(new File([], ''))
-  const dataArray: Object[] = []
+  let dataArray: Object[] = []
 
   const handleCsvFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -14,6 +22,9 @@ const CsvReader = () => {
   }
 
   const uploadCsvFile = () => {
+    dispatch(clearDataJson())
+    dispatch(clearHeaders())
+
     const file : File = csvFile
     const reader = new FileReader()
 
@@ -28,27 +39,36 @@ const CsvReader = () => {
     reader.readAsText(file)
 
   }
+  
 
   const processCsvFile = (str: string, delim = ',') => {
+
+    dispatch(clearDataJson())
+    dispatch(clearHeaders())
+    
     const headers = str.slice(0, str.indexOf('\n',)).split(delim)
     if (headers[0] === '') {
       headers[0] = 'Index No'
     }
+
+    dispatch(setHeaders(headers))
+
     const rows = str.slice(str.indexOf('\n') + 1).split('\n')
     rows.pop()
 
-    let seperatedRows: object[] = []
+    const seperatedRows: object[] = []
 
     for (let i = 0; i < rows.length; i++) { 
-      let tempRow = rows[i].split(delim)
+      const tempRow = rows[i].split(delim)
       seperatedRows.push(tempRow)
     }
 
+    dataArray = []
+    
     seperatedRows.forEach(row => {
       const el = Object.values(row)
-      let tempObj: Object = {}
+      const tempObj: Object = {}
       for (let i = 0; i < el.length; i++) {
-        // tempObj = { [headers[i]]: el[i] }
         Object.defineProperty(tempObj, headers[i], {value : el[i],
           writable : true,
           enumerable : true,
@@ -56,8 +76,7 @@ const CsvReader = () => {
       }
       dataArray.push(tempObj)
     })
-
-    console.log(dataArray)
+    dispatch(setDataJson(dataArray))
   }
 
   return (
@@ -65,7 +84,7 @@ const CsvReader = () => {
       textAlign: 'center',
       p: 4,
     }}>
-      <Typography variant='h3'> CSV Reader </Typography>
+      <Typography variant='h3' sx={{fontWeight: 'bold'}}>DDoS Log File Reader </Typography>
       <br />
       <Typography variant='overline' sx={{ color: '#48007f', fontWeight: 'bold' }}> Upload your CSV log file</Typography>
       <br />
@@ -73,19 +92,24 @@ const CsvReader = () => {
         <form
           style={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }}
           id='inputForm'>
-          <input
+          <Input
             type="file"
-            accept='.csv'
+            inputProps={{accept: ".csv"}}
             id='csvFileInput'
             onChange={handleCsvFileChange}
           />
-          <UploadRoundedIcon sx={{ height: 40, cursor: 'pointer', color: '#48007f'}}
+          <UploadRoundedIcon sx={{ cursor: 'pointer', color: '#48007f', ml: 2 }}
             onClick={(e) => {
               e.preventDefault()
               if(csvFile) uploadCsvFile()
             }}
           />
         </form>
+      </Container>
+      <Container sx={{ mt: 6, }}>
+        {
+          dataJson.length > 0 && <DataTable />
+        }
       </Container>
     </Container>
   )

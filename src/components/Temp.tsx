@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { decrementTemp, incrementTemp } from '../../redux/features/temp';
-import { RootState } from '../../redux/store';
+import { decrementTemp, incrementTemp } from '../redux/features/temp';
+import { RootState } from '../redux/store';
 
 const Temp = () => {
   

@@ -1,8 +1,9 @@
-import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from '@mui/material';
+import { Button, Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearDataJson } from '../redux/features/dataJson';
 import { RootState } from '../redux/store';
+import DataProcessor from './DataProcessor';
 
 const DataTable = () => {
 
@@ -138,6 +139,10 @@ const DataTable = () => {
           />
         </div>
       </Paper>
+
+      <Container>
+        <DataProcessor/>
+      </Container>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import UploadRoundedIcon from '@mui/icons-material/UploadRounded';
-import { Container, Input, Typography } from '@mui/material';
+import { Box, Container, Input, Typography } from '@mui/material';
 import { ChangeEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearDataJson, clearHeaders, setDataJson, setHeaders } from '../redux/features/dataJson';
@@ -80,7 +80,7 @@ const CsvReader = () => {
   }
 
   return (
-    <Container sx={{
+    <Box sx={{
       textAlign: 'center',
       p: 4,
     }}>
@@ -111,7 +111,7 @@ const CsvReader = () => {
           dataJson.length > 0 && <DataTable />
         }
       </Container>
-    </Container>
+    </Box>
   )
 }
 

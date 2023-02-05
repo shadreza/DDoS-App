@@ -6,7 +6,7 @@ function App() {
   return (
     <Box sx={{
       backgroundColor: '#a7ffeb',
-      height: '100vh',
+      minHeight: '100vh'
     }}>
       <CsvReader/>
     </Box>

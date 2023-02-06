@@ -6,8 +6,8 @@ import { RootState } from "../redux/store";
 
 const DataProcessor = () => {
 
-  // const baseURL = "https://ddos-be.onrender.com/"
-  const baseURL = "http://127.0.0.1:8000/"
+  const baseURL = "https://ddos-be.onrender.com/"
+  // const baseURL = "http://127.0.0.1:8000/"
   const additionOfPostURL = ["data", "predict"]
 
   const [post, setPost] = useState(null)

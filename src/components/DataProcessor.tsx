@@ -8,7 +8,7 @@ const DataProcessor = () => {
 
   // const baseURL = "https://ddos-be.onrender.com/"
   const baseURL = "http://127.0.0.1:8000/"
-  const additionOfPostURL = "predict"
+  const additionOfPostURL = ["data", "predict"]
 
   const [post, setPost] = useState(null)
   const [connectionState, setConnectionState] = useState(false)
@@ -78,7 +78,7 @@ const DataProcessor = () => {
 
   const sendDataToBE = async () => {
     await axios
-      .post( (baseURL + additionOfPostURL) , {
+      .post( (baseURL + additionOfPostURL[1]) , {
         data: {
           height: height,
           weight: weight,
@@ -88,7 +88,6 @@ const DataProcessor = () => {
       .then((response) => {
         setHasDataBeenSent(true)
         setResponseFromBE(response.data)
-        beautifyNames("asdasd()")
       })
       .catch((e) => {
         console.log(e)

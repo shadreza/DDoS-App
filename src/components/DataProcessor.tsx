@@ -6,8 +6,8 @@ import { RootState } from "../redux/store";
 
 const DataProcessor = () => {
 
-  const baseURL = "https://ddos-be.onrender.com/"
-  // const baseURL = "http://127.0.0.1:8000/"
+  const baseURL = "https://ddos-be.onrender.com"
+  // const baseURL = "http://127.0.0.1:8000"
   const additionOfPostURL = ["data", "predict"]
 
   const [post, setPost] = useState(null)
@@ -78,7 +78,7 @@ const DataProcessor = () => {
 
   const sendDataToBE = async () => {
     await axios
-      .post( (baseURL + additionOfPostURL[1]) , {
+      .post( (baseURL + "/" + additionOfPostURL[1]) , {
         data: {
           height: height,
           weight: weight,

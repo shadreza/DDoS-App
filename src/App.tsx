@@ -34,19 +34,16 @@ function App() {
       backgroundColor: '#a7ffeb',
       minHeight: '100vh'
     }}>
-      
+      <CsvReader />
       {
         attacks.map((attack) => {
           return (
             <div key={attack.id}>
-              {" "}
               <h1>{attack.name}</h1>
             </div>
           )
         })
       }
-
-      <CsvReader/>
     </Box>
   );
 }
